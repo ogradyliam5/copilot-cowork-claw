@@ -134,6 +134,12 @@ function Save-Running {
     ConvertTo-Json -InputObject @($list) | Set-Content -LiteralPath $PidFile -Encoding utf8NoBOM
 }
 
+function Stop-Tree([int]$Id) {
+    # Stop a process and everything it started (for example Cowork's background jobs).
+    & taskkill.exe /PID $Id /T /F *> $null
+    if (Get-Process -Id $Id -ErrorAction SilentlyContinue) { Stop-Process -Id $Id -Force -ErrorAction SilentlyContinue }
+}
+
 function Stop-Stale {
     # Stop processes left behind by an earlier run that didn't shut down cleanly.
     if (-not (Test-Path -LiteralPath $PidFile)) { return 0 }
@@ -144,7 +150,7 @@ function Stop-Stale {
         try {
             $p = Get-Process -Id ([int]$e.id) -ErrorAction Stop
             if ($p.StartTime.ToUniversalTime().Ticks -eq [long]$e.start) {
-                Stop-Process -Id $p.Id -Force -ErrorAction Stop
+                Stop-Tree $p.Id
                 $count++
             }
         } catch { }
@@ -166,7 +172,7 @@ function Start-Background([string]$Name, [string]$FilePath, [string[]]$Arguments
 function Stop-Running {
     if ($script:Running.Count -eq 0) { return }
     foreach ($p in $script:Running.Values) {
-        if (-not $p.HasExited) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
+        if (-not $p.HasExited) { Stop-Tree $p.Id }
     }
     $script:Running.Clear()
     Remove-Item -LiteralPath $PidFile -Force -ErrorAction SilentlyContinue
@@ -196,10 +202,14 @@ function Show-Logs {
 
 function Get-HttpStatus([string]$Uri) {
     try {
-        $r = Invoke-WebRequest -Uri $Uri -Method Get -TimeoutSec 10 -SkipHttpErrorCheck -UserAgent 'claw-pc-check' `
-            -Headers @{ 'X-Tunnel-Skip-AntiPhishing-Page' = 'true' }
-        return [int]$r.StatusCode
-    } catch { return 0 }
+        $r = Invoke-WebRequest -Uri $Uri -Method Get -TimeoutSec 10 -SkipHttpErrorCheck -MaximumRedirection 0 `
+            -UserAgent 'claw-pc-check' -Headers @{ 'X-Tunnel-Skip-AntiPhishing-Page' = 'true' }
+        $script:LastHttpStatus = [int]$r.StatusCode
+        return $script:LastHttpStatus
+    } catch {
+        $script:LastHttpStatus = 0
+        return 0
+    }
 }
 
 function Wait-HttpOk([string]$Uri, [int]$Seconds) {
@@ -260,7 +270,7 @@ function Sync-Server {
     # build it - only on the first run or when the server files have changed.
     $hash = Get-FolderHash $ServerSrc
     if ($script:State.serverHash -eq $hash -and (Test-Path -LiteralPath (Join-Path $ServerDir 'dist\main.js'))) { return }
-    Write-Step 'Building the Claw server (first run or after an update - about a minute)...'
+    Write-Step 'Building the Claw server (first run or after an update - a minute or two)...'
     if (Test-Path -LiteralPath $ServerDir) { Remove-Item -LiteralPath $ServerDir -Recurse -Force }
     New-Item -ItemType Directory -Force -Path $ServerDir | Out-Null
     Get-ChildItem -LiteralPath $ServerSrc -Force |
@@ -428,10 +438,10 @@ function Initialize-Tunnel {
     }
     $id = $script:State.tunnelId
     $show = & devtunnel show $id 2>&1 | Out-String
-    if ($LASTEXITCODE -ne 0) {
+    if ($LASTEXITCODE -ne 0 -or $show -match '(?i)not found|does not exist|no such') {
         Write-Step 'Creating your private dev tunnel...'
         $created = & devtunnel create $id --allow-anonymous 2>&1 | Out-String
-        if ($LASTEXITCODE -ne 0) {
+        if ($LASTEXITCODE -ne 0 -and $created -notmatch '(?i)already exists|conflict') {
             throw "Couldn't create the dev tunnel: $($created.Trim()) - your organisation may block dev tunnels or anonymous access (see docs\troubleshooting.md)."
         }
         $show = ''
@@ -544,7 +554,10 @@ function Start-Claw {
     if (-not $base) { throw "Couldn't find your tunnel's address. Details: $(Join-Path $LogDir 'tunnel.out.log')" }
     $cowork = "$base/cowork-$($script:State.secret)"
     if (-not (Wait-HttpOk "$cowork/health" 60)) {
-        throw "The tunnel didn't connect. Check your internet connection. Details: $(Join-Path $LogDir 'tunnel.out.log')"
+        $hint = if ($script:LastHttpStatus -in 301, 302, 303, 307, 308, 401, 403) {
+            'The tunnel is asking for sign-in, so anonymous access is probably blocked (often by an organisation policy - see docs\troubleshooting.md).'
+        } else { 'Check your internet connection.' }
+        throw "The tunnel didn't connect (last response: $($script:LastHttpStatus)). $hint Details: $(Join-Path $LogDir 'tunnel.out.log')"
     }
 
     Write-Step 'Testing the connection end to end (through the internet)...'
