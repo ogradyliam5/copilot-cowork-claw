@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/vDevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "37288842-9484-59af-abb5-ce2997542d36",
+  "packageName": "com.cowork.plugin.claw-pc",
+  "developer": {
+    "name": "Liam O'Grady",
+    "websiteUrl": "https://github.com/ogradyliam5/copilot-cowork-claw",
+    "privacyUrl": "https://github.com/ogradyliam5/copilot-cowork-claw/blob/main/docs/security.md",
+    "termsOfUseUrl": "https://github.com/ogradyliam5/copilot-cowork-claw/blob/main/LICENSE"
+  },
+  "name": {
+    "short": "Claw PC",
+    "full": "Claw PC - let Cowork work on your Windows PC"
+  },
+  "description": {
+    "short": "Run commands, PowerShell, files and long jobs on your own Windows PC.",
+    "full": "Connects Copilot Cowork to the Claw server running on your own Windows PC through a private Microsoft dev tunnel. Cowork can run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine. Start-Claw.cmd from https://github.com/ogradyliam5/copilot-cowork-claw builds this plugin with your own secret URL."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#6E56CF",
+  "agentSkills": [
+    { "folder": "./skills/claw-pc" }
+  ],
+  "agentConnectors": [
+    {
+      "id": "claw-pc",
+      "displayName": "Claw PC",
+      "description": "Operate the user's own Windows PC (Claw PC): run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine (OS, runtimes, disks, processes).",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://PASTE-YOUR-COWORK-URL-HERE/mcp",
+          "authorization": { "type": "None" }
+        }
+      }
+    }
+  ]
+}
