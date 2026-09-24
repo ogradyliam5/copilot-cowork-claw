@@ -28,12 +28,12 @@ interface JobEntry {
 }
 
 /**
- * JobManager runs long-lived, detached processes for work that exceeds
- * Copilot Studio's ~2 minute request timeout. Callers `start()` a job, then
- * poll `status()`/`output()` until it finishes, or `cancel()` it.
+ * JobManager runs long-lived, detached processes for work that takes longer
+ * than a single tool call allows. Callers `start()` a job, then poll
+ * `status()`/`output()` until it finishes, or `cancel()` it.
  *
  * Job state is persisted to `<JOB_DIRECTORY>/<jobId>/status.json` so
- * `status`/`list` keep working across a service restart, even though the
+ * `status`/`list` keep working across a server restart, even though the
  * underlying process itself does not survive a restart.
  */
 export class JobManager {

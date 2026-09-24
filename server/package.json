@@ -1,7 +1,7 @@
 {
-  "name": "copilot-studio-claw",
-  "version": "0.1.0",
-  "description": "Give a Copilot Studio agent a machine it can actually operate. An MCP server bridging a Microsoft Copilot Studio (GitHub Copilot harness) agent to a dedicated Windows VM.",
+  "name": "claw-pc-server",
+  "version": "1.0.0",
+  "description": "The Claw PC MCP server: lets Microsoft 365 Copilot Cowork run commands, PowerShell, files and background jobs on a Windows PC or virtual machine.",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -24,7 +24,7 @@
   "keywords": [
     "mcp",
     "model-context-protocol",
-    "copilot-studio",
+    "copilot-cowork",
     "windows",
     "automation",
     "agent"

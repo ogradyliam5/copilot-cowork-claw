@@ -3,12 +3,12 @@ import { getConfig } from '../config/index.js';
 import { truncateUtf8 } from '../util/output.js';
 
 /**
- * Build a Copilot-Studio-safe tool result.
+ * Build a tool result that every MCP client can read.
  *
  * We deliberately return a single text block containing JSON rather than using
  * `structuredContent` + `outputSchema`: output schemas can contain `$ref`,
- * which Copilot Studio silently drops, removing the whole tool. The JSON text
- * is truncated to the configured byte budget so we never exceed the ~500 KB cap.
+ * which some MCP clients silently drop, removing the whole tool. The JSON text
+ * is truncated to the configured byte budget so responses stay small.
  */
 export function jsonResult(data: unknown, isError = false): CallToolResult {
   const cfg = getConfig();

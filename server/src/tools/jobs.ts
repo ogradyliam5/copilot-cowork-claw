@@ -10,10 +10,10 @@ const VALID_STREAMS = ['stdout', 'stderr', 'both'] as const;
 /**
  * Job tools — start, poll, and manage long-running detached processes.
  *
- * Copilot Studio enforces a ~2 minute request timeout, so anything that might
- * run longer (builds, installs, test suites, long scripts) must be started
- * with `job_start` and then polled with `job_status`/`job_output` rather than
- * run synchronously via `exec`/`powershell`.
+ * Claw PC stops `exec`/`powershell` calls after 25 seconds (Cowork expects every
+ * call to finish within 30), so anything that might run longer (builds, installs,
+ * test suites, long scripts) must be started with `job_start` and then polled with
+ * `job_status`/`job_output` rather than run synchronously.
  */
 export function registerJobs(server: McpServer, jobs: JobManager): void {
   server.registerTool(
@@ -26,7 +26,7 @@ export function registerJobs(server: McpServer, jobs: JobManager): void {
       inputSchema: {
         command: z.string().describe('For shell "exec", the executable name/path. For shell "powershell", the full script text.'),
         args: z.array(z.string()).optional().describe('Argument list, used only when shell is "exec".'),
-        cwd: z.string().optional().describe('Working directory. Defaults to the service working directory.'),
+        cwd: z.string().optional().describe('Working directory. Defaults to the claw workspace folder.'),
         env: z.record(z.string(), z.string()).optional().describe('Extra environment variables merged over the process environment.'),
         shell: z.string().optional().describe('"exec" (default) to spawn command+args directly, or "powershell" to run `command` as a PowerShell script.'),
       },

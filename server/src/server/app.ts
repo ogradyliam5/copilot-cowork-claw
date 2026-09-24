@@ -13,15 +13,15 @@ import type { MachineAdapter } from '../core/adapter.js';
  * - POST /mcp is the MCP Streamable HTTP endpoint, protected by the API key.
  *
  * Stateless mode: a new McpServer + transport is created per request and closed
- * when the response finishes. This avoids depending on Copilot Studio's
- * (undocumented) MCP session semantics.
+ * when the response finishes, so the server never depends on a client's MCP
+ * session handling.
  */
 export function createApp(adapter: MachineAdapter) {
   const app = express();
   app.use(express.json({ limit: '10mb' }));
 
   app.get('/health', (_req: Request, res: Response) => {
-    res.json({ status: 'ok', service: 'copilot-studio-claw', version });
+    res.json({ status: 'ok', service: 'claw-pc', version });
   });
 
   app.get('/version', (_req: Request, res: Response) => {

@@ -3,7 +3,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { getConfig } from '../config/index.js';
 
 /**
- * API-key middleware. v0.1 auth: a shared secret in a configurable header,
+ * API-key middleware: a shared secret in a configurable header,
  * compared in constant time. When no API_KEY is configured, auth is disabled
  * (development only) and a warning is logged at startup elsewhere.
  *

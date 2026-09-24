@@ -1,6 +1,6 @@
 # Security policy
 
-Claw PC gives Copilot Cowork the same access to your PC that you have.
+Claw PC gives Copilot Cowork the same access to its machine as the Windows account that runs it.
 [docs/security.md](docs/security.md) explains how it's protected and what it can't protect
 against. Please read it before you use Claw PC.
 

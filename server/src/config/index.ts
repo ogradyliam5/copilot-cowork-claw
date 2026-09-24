@@ -18,14 +18,14 @@ const RawConfig = z.object({
 
   /** Shared secret required in the API key header. Empty disables auth (dev only). */
   API_KEY: z.string().default(''),
-  /** Header name Copilot Studio sends the key in. */
+  /** Header the API key is read from (Claw PC's local proxy adds it). */
   API_KEY_HEADER: z.string().default('x-api-key'),
 
   LOG_LEVEL: z.enum(['trace', 'debug', 'info', 'warn', 'error', 'fatal']).default('info'),
   LOG_DIRECTORY: z.string().default(path.join(DEFAULT_PROGRAM_DATA, 'claw', 'logs')),
   JOB_DIRECTORY: z.string().default(path.join(DEFAULT_PROGRAM_DATA, 'claw', 'jobs')),
 
-  /** Hard cap on bytes returned in any single tool response (stays under Copilot Studio's ~500KB). */
+  /** Hard cap on bytes returned in any single tool response, so responses stay small. */
   MAX_OUTPUT_BYTES: z.coerce.number().int().positive().default(200_000),
   DEFAULT_TIMEOUT_SECONDS: z.coerce.number().int().positive().default(60),
   MAX_TIMEOUT_SECONDS: z.coerce.number().int().positive().default(600),

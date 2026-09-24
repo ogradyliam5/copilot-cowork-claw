@@ -6,8 +6,9 @@ import { getConfig } from '../config/index.js';
 import { truncateUtf8 } from '../util/output.js';
 
 /**
- * powershell — run a (multiline) PowerShell 7 script. Inside the dedicated VM
- * there are no artificial restrictions on available commands.
+ * powershell — run a (multiline) PowerShell 7 script. There are no artificial
+ * restrictions on commands: scripts run with the rights of the account that
+ * runs Claw PC.
  */
 export function registerPowerShell(server: McpServer, adapter: MachineAdapter): void {
   server.registerTool(
@@ -22,7 +23,7 @@ export function registerPowerShell(server: McpServer, adapter: MachineAdapter): 
         cwd: z.string().optional().describe('Working directory.'),
         env: z.record(z.string(), z.string()).optional().describe('Extra environment variables.'),
         timeoutSeconds: z.number().optional().describe('Timeout in seconds, clamped to the server maximum.'),
-        elevated: z.boolean().optional().describe('Best-effort request to run elevated (no-op if the service is already Administrator).'),
+        elevated: z.boolean().optional().describe('Not supported: Claw PC never runs elevated, so this is ignored.'),
       },
     },
     async (input) => {

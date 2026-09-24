@@ -32,7 +32,7 @@ anything that starts with `cowork-` first: that's your secret.
 | --- | --- |
 | No **Upload plugin** option | Your admin may not allow custom plugins. Ask them. |
 | Cowork says the plugin already exists | Remove the old one (**Customize → Plugins → Claw PC → Remove**), then upload again. |
-| Cowork doesn't use Claw PC | Check the Claw PC window is open and running, start a **new** conversation, check **Claw PC** is on under **Sources**, and say "on my PC" in your request. |
+| Cowork doesn't use Claw PC | Check the Claw PC window is open and running, start a **new** conversation, check **Claw PC** is on under **Sources**, and say "on my PC" or "on Claw PC" in your request. |
 | It worked before, but not after `-Rotate` or reinstalling | The secret URL changed. Upload the new `claw-pc-plugin-READY.zip` (run `.\Start-Claw.cmd -Plugin` if you deleted it). |
 | A command stops after 25 seconds | That's deliberate: Cowork expects every call to finish within 30 seconds. Ask Cowork to run it as a background job. |
 

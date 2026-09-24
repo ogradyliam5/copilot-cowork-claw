@@ -8,7 +8,7 @@ const VALID_SECTIONS: SystemInfoSection[] = ['os', 'hardware', 'disks', 'network
 /**
  * system_info — one tool with a `sections` filter (rather than many small tools)
  * to conserve the agent's tool budget. Enums are validated server-side because
- * Copilot Studio treats enum inputs as free strings.
+ * some MCP clients treat enum inputs as free strings.
  */
 export function registerSystemInfo(server: McpServer, adapter: MachineAdapter): void {
   server.registerTool(

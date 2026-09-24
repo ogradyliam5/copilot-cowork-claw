@@ -1,8 +1,8 @@
 /**
  * MachineAdapter is the seam between MCP tools and the machine they operate.
  *
- * v0.1 ships a WindowsAdapter. Future targets (Windows 365, SSH, Docker,
- * Linux) implement the same interface without touching tool definitions.
+ * Claw PC ships a WindowsAdapter. Other targets (SSH, Docker, Linux) could
+ * implement the same interface without touching tool definitions.
  */
 
 export interface ProcessRequest {
@@ -26,7 +26,7 @@ export interface PowerShellRequest {
   cwd?: string;
   env?: Record<string, string>;
   timeoutSeconds?: number;
-  /** Best-effort request to run elevated (already-Administrator service is a no-op). */
+  /** Not supported: Claw PC never runs elevated, so this is ignored. */
   elevated?: boolean;
 }
 

@@ -17,7 +17,7 @@ import type {
 } from './adapter.js';
 
 /**
- * WindowsAdapter — the v0.1 implementation of MachineAdapter for a Windows VM.
+ * WindowsAdapter — the MachineAdapter for a Windows PC or virtual machine.
  * Process/PowerShell execution is delegated to core/process; filesystem and
  * system_info are implemented with Node APIs plus targeted PowerShell probes.
  */
@@ -242,7 +242,7 @@ export class WindowsAdapter implements MachineAdapter {
       out.env = redactEnv(process.env);
     }
     // Sections that need OS probes (disks, network, ports, processes) are gathered
-    // via PowerShell so they stay accurate on the VM.
+    // via PowerShell so they stay accurate on Windows.
     const psSections: SystemInfoSection[] = (['disks', 'network', 'ports', 'processes'] as SystemInfoSection[]).filter(want);
     if (psSections.length > 0) {
       const script = buildSysInfoScript(psSections);

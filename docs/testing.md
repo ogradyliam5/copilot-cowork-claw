@@ -2,7 +2,7 @@
 
 ## 1. It tests itself every time it starts
 
-When Claw PC starts, it sends a real request out through the internet and back into your PC
+When Claw PC starts, it sends a real request out through the internet and back into the machine
 through your tunnel, and runs a command. Look for these two lines:
 
 - **End-to-end test passed.**
@@ -53,5 +53,7 @@ Don't paste the output anywhere: it includes your secret URL.
 
 Cowork may ask you to approve commands, writes and deletes. That's expected; reads run straight
 away.
+
+Running Claw PC on a virtual machine? "On my PC" still works, or say "on Claw PC".
 
 If something doesn't work, see [troubleshooting](troubleshooting.md).

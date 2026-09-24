@@ -4,8 +4,8 @@ import path from 'node:path';
 import { getConfig } from '../config/index.js';
 
 /**
- * Structured JSON logger. Writes to stdout (captured by the Windows service
- * wrapper) and, when a log directory is configured, to a rotating file.
+ * Structured JSON logger. Writes to stdout (claw.ps1 saves it to
+ * server.out.log) and, when a log directory is configured, to a rotating file.
  */
 function createLogger(): pino.Logger {
   const cfg = getConfig();

@@ -29,10 +29,10 @@ important.
 | Protection | What it does |
 | --- | --- |
 | Never administrator | `claw.ps1` refuses to run elevated, so Cowork only gets your normal user rights. If a Windows "Do you want to allow this app to make changes?" prompt appears that you didn't expect, select **No**. |
-| Secret URL | Cowork reaches your PC only through an unguessable 192-bit secret path. Every other request gets a 404. |
-| The API key never leaves your PC | Cowork plugins can't send API keys yet, so the local proxy (Caddy) adds the server's key itself. The server rejects anything without it. |
+| Secret URL | Cowork reaches the machine only through an unguessable 192-bit secret path. Every other request gets a 404. |
+| The API key never leaves the machine | Cowork plugins can't send API keys yet, so the local proxy (Caddy) adds the server's key itself. The server rejects anything without it. |
 | Nothing listens on your network | The server and proxy only listen on localhost. The dev tunnel connects outwards, so no router or firewall ports are opened. |
-| Secrets stay on your PC | Keys, the tunnel ID and the plugin ID are created on your PC the first time it runs, and kept in `%LOCALAPPDATA%\claw-pc`. Nothing secret is in this repo. |
+| Secrets stay on the machine | Keys, the tunnel ID and the plugin ID are created on the machine the first time it runs, and kept in `%LOCALAPPDATA%\claw-pc`. Nothing secret is in this repo. |
 | Settings stay out of commands | The server removes its API key and port settings from its own environment, so commands it runs can't read them. |
 | Approvals | Every tool is marked read-only or not, so Cowork runs reads straight away and asks before commands, writes, deletes and jobs. Cowork is still rolling this out for non-Microsoft plugins, so you might not see prompts yet. |
 | Guidance for Cowork | The plugin's skill tells Cowork to work in `%USERPROFILE%\claw-workspace`, stay away from credentials and personal data, and ask before system-wide changes. This guides Cowork; it isn't a hard barrier. |
@@ -47,7 +47,7 @@ important.
   instructions that try to make it run commands. The skill tells Cowork to treat that text as
   data, and approvals help, but check what Cowork is about to run.
 - **The relay can see your traffic.** Microsoft dev tunnels end the HTTPS connection at the relay
-  and forward requests to your PC. Don't use Claw PC for anything you wouldn't send through a
+  and forward requests to the machine. Don't use Claw PC for anything you wouldn't send through a
   Microsoft cloud service.
 - **Mistakes.** Like any assistant, Cowork can get things wrong. Keep backups of anything
   important.

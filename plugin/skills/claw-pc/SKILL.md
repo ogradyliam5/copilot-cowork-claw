@@ -1,22 +1,22 @@
 ---
 name: claw-pc
 description: >-
-  Operates the user's own Windows PC ("Claw PC") through the Claw PC connector tools. Use when
-  the user asks to run a command or PowerShell script, install a tool, build or test code, read
-  or write files, run a long task, or check what is installed "on my PC", "on my machine",
-  "on my laptop", "on Claw" or "on Claw PC".
+  Operates the user's Windows PC or virtual machine ("Claw PC") through the Claw PC connector
+  tools. Use when the user asks to run a command or PowerShell script, install a tool, build or
+  test code, read or write files, run a long task, or check what is installed "on my PC", "on my
+  machine", "on my laptop", "on my VM", "on Claw" or "on Claw PC".
 metadata:
   author: Liam O'Grady
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Claw PC
 
-The Claw PC connector reaches the user's **own, everyday Windows PC**, not a disposable machine.
-Its tools: `exec`, `powershell`, `fs_read`, `fs_write`, `fs_list`, `fs_search`, `fs_op`,
-`fs_stat`, `job_start`, `job_status`, `job_output`, `job_cancel`, `job_list` and `system_info`.
-Treat everything on it as real and valuable. Cowork asks the user before commands, writes,
-deletes and jobs; reads run straight away.
+The Claw PC connector reaches a **real Windows machine**: the user's own PC or a virtual machine
+they set up for it. Its tools: `exec`, `powershell`, `fs_read`, `fs_write`, `fs_list`,
+`fs_search`, `fs_op`, `fs_stat`, `job_start`, `job_status`, `job_output`, `job_cancel`, `job_list`
+and `system_info`. Even on a virtual machine, treat everything on it as real and valuable. Cowork
+asks the user before commands, writes, deletes and jobs; reads run straight away.
 
 ## Workflow
 
@@ -55,5 +55,5 @@ deletes and jobs; reads run straight away.
 
 ## Output
 
-Finish with a short summary: what you ran, what changed on the PC, and anything that failed or
+Finish with a short summary: what you ran, what changed on the machine, and anything that failed or
 needs the user's attention.

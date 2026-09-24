@@ -11,10 +11,10 @@ import { version } from './version.js';
  */
 export function createMcpServer(adapter: MachineAdapter): McpServer {
   const server = new McpServer(
-    { name: 'copilot-studio-claw', version },
+    { name: 'claw-pc', version },
     {
       instructions:
-        'Operate a dedicated Windows VM. Use system_info before assuming tools exist; use exec/powershell to run commands and install software; use job_* tools for anything that may run longer than a minute.',
+        'Operate a Windows PC or virtual machine. Use system_info before assuming tools exist; use exec/powershell to run commands and install software; use job_* tools for anything that may take longer than about 20 seconds.',
     },
   );
   registerAllTools(server, adapter);

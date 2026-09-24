@@ -10,9 +10,8 @@ import { JobManager } from '../jobs/manager.js';
 /**
  * Register the full claw tool set on an McpServer instance.
  *
- * Kept small and general-purpose on purpose: Copilot Studio caps concurrent MCP
- * servers per conversation and counts every tool against the agent's tool budget,
- * so a few powerful tools beat many narrow ones.
+ * Kept small and general-purpose on purpose: agents count every tool against
+ * their tool budget, so a few powerful tools beat many narrow ones.
  *
  * The JobManager is a module-level singleton so background jobs survive across
  * the stateless per-request registrations (each MCP request may construct a

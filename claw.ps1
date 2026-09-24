@@ -2,7 +2,7 @@
 <#
 .SYNOPSIS
     Claw PC - lets Microsoft 365 Copilot Cowork run commands, PowerShell, files and long jobs on
-    this Windows PC through a private Microsoft dev tunnel.
+    this Windows machine (a PC or a virtual machine) through a private Microsoft dev tunnel.
 
 .DESCRIPTION
     First run:  installs anything missing (Node.js LTS, Caddy and the dev tunnel CLI), builds the
@@ -11,7 +11,7 @@
     Later runs: starts everything in a few seconds.
 
     Keep the window open while you use Claw PC in Cowork. Press Ctrl+C or close the window to
-    stop. While it is stopped, Cowork cannot reach this PC.
+    stop. While it is stopped, Cowork cannot reach this machine.
 
     Run it from a normal window, not "Run as administrator". The easiest way is to double-click
     Start-Claw.cmd, which also installs PowerShell 7 if you need it.
@@ -30,7 +30,7 @@
     and the apps it installed are left alone.
 
 .PARAMETER SelfTest
-    Build, start and test everything on this PC without opening the tunnel, then exit.
+    Build, start and test everything on this machine without opening the tunnel, then exit.
     Nothing is exposed to the internet. CI runs this on every change.
 #>
 [CmdletBinding()]
@@ -601,7 +601,7 @@ function Invoke-Uninstall {
     Write-Step 'Deleting keys, logs and the server build...'
     Remove-Item -LiteralPath $StateDir -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -LiteralPath $ReadyZip -Force -ErrorAction SilentlyContinue
-    Write-Good 'Claw PC has been removed from this PC.'
+    Write-Good 'Claw PC has been removed from this machine.'
     Write-Host ''
     Write-Host '  Also remove the plugin in Cowork: Customize > Plugins > Claw PC > Remove.'
     Write-Host "  Your workspace folder was left alone: $Workspace"

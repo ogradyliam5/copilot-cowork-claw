@@ -186,5 +186,4 @@ Every change is tested on Windows by [CI](.github/workflows/ci.yml), which runs
 
 ## License
 
-[MIT](LICENSE) © 2026 Liam O'Grady. The server is adapted from copilot-studio-claw, which runs the
-same tools on a dedicated Azure VM for Copilot Studio.
+[MIT](LICENSE) © 2026 Liam O'Grady.

@@ -25,7 +25,7 @@ export function registerExec(server: McpServer, adapter: MachineAdapter): void {
       inputSchema: {
         command: z.string().describe('Executable name or full path, e.g. "git" or "C:\\\\tools\\\\foo.exe".'),
         args: z.array(z.string()).optional().describe('Argument list. Each argument is passed verbatim.'),
-        cwd: z.string().optional().describe('Working directory. Defaults to the service working directory.'),
+        cwd: z.string().optional().describe('Working directory. Defaults to the claw workspace folder.'),
         env: z.record(z.string(), z.string()).optional().describe('Extra environment variables merged over the process environment.'),
         timeoutSeconds: z.number().optional().describe('Timeout in seconds. Clamped to the server maximum.'),
       },

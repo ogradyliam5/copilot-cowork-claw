@@ -10,8 +10,8 @@ import { version } from './server/version.js';
  */
 function main(): void {
   const cfg = getConfig();
-  // Keep claw's own settings out of the commands the agent runs: they can't read the API key,
-  // and apps they start don't pick up claw's HOST or PORT.
+  // Keep Claw's own settings out of the commands the agent runs: they can't read the API key,
+  // and apps they start don't pick up Claw's HOST or PORT.
   for (const key of ['API_KEY', 'API_KEY_HEADER', 'HOST', 'PORT']) delete process.env[key];
   const adapter = new WindowsAdapter();
   const app = createApp(adapter);

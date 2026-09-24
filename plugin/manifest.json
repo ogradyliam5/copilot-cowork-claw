@@ -12,11 +12,11 @@
   },
   "name": {
     "short": "Claw PC",
-    "full": "Claw PC - let Cowork work on your Windows PC"
+    "full": "Claw PC - let Cowork work on your Windows PC or VM"
   },
   "description": {
-    "short": "Run commands, PowerShell, files and long jobs on your own Windows PC.",
-    "full": "Connects Copilot Cowork to the Claw server running on your own Windows PC through a private Microsoft dev tunnel. Cowork can run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine. Start-Claw.cmd from https://github.com/ogradyliam5/copilot-cowork-claw builds this plugin with your own secret URL."
+    "short": "Run commands, PowerShell, files and long jobs on your Windows PC or VM.",
+    "full": "Connects Copilot Cowork to the Claw server running on your Windows PC or virtual machine through a private Microsoft dev tunnel. Cowork can run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine. Start-Claw.cmd from https://github.com/ogradyliam5/copilot-cowork-claw builds this plugin with your own secret URL."
   },
   "icons": {
     "color": "color.png",
@@ -30,7 +30,7 @@
     {
       "id": "claw-pc",
       "displayName": "Claw PC",
-      "description": "Operate the user's own Windows PC (Claw PC): run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine (OS, runtimes, disks, processes).",
+      "description": "Operate the user's Windows PC or virtual machine (Claw PC): run commands and PowerShell 7 scripts, read, write and search files, run long tasks as background jobs, and inspect the machine (OS, runtimes, disks, processes).",
       "toolSource": {
         "remoteMcpServer": {
           "mcpServerUrl": "https://PASTE-YOUR-COWORK-URL-HERE/mcp",

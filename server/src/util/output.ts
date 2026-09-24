@@ -1,6 +1,6 @@
 /**
- * Output-limiting helpers. Copilot Studio rejects connector responses over
- * ~500 KB, so every tool truncates its output to a configured byte budget.
+ * Output-limiting helpers. Every tool truncates its output to a configured
+ * byte budget, so responses stay small enough for the agent to use.
  */
 
 export interface TruncateResult {
