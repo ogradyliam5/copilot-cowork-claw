@@ -4,9 +4,25 @@ Claw PC is deliberately powerful. Please read this before you use it.
 
 ## What Cowork can do
 
-While Claw PC is running, Cowork can do anything **your Windows account** can do on this PC:
-read and change your files, run programs, and use anything you're signed in to from the command
-line (Git, cloud CLIs and so on). So can anyone who has your secret URL.
+While Claw PC is running, Cowork can do anything **the Windows account running it** can do on
+that machine: read and change files, run programs, and use anything that account is signed in to
+from the command line (Git, cloud CLIs and so on). So can anyone who has your secret URL.
+
+## Use a virtual machine (recommended)
+
+The simplest way to limit that reach is to run Claw PC somewhere it can't reach anything
+important.
+
+- **A virtual machine (best):** run Claw PC inside a Hyper-V virtual machine (built into the Pro,
+  Enterprise and Education editions of Windows 10 and 11), an Azure VM or a Windows 365 Cloud PC.
+  Everything Cowork does stays inside the VM.
+  - Only sign in to what Cowork's tasks need, for example a GitHub token limited to the repos it
+    should touch.
+  - Keep personal and sensitive files off the VM.
+  - Take a checkpoint or snapshot once it's set up, so you can roll back.
+- **A separate Windows account (if you use your own PC):** create a standard (not administrator)
+  local account just for Claw PC, and run it while signed in as that account. Cowork then can't
+  see your main account's files.
 
 ## How it's protected
 
@@ -35,14 +51,6 @@ line (Git, cloud CLIs and so on). So can anyone who has your secret URL.
   Microsoft cloud service.
 - **Mistakes.** Like any assistant, Cowork can get things wrong. Keep backups of anything
   important.
-
-## Want more isolation?
-
-- **A separate Windows account:** create a standard (not administrator) local account just for
-  Claw PC, and run it while signed in as that account. Cowork then can't see your main
-  account's files.
-- **A virtual machine:** run Claw PC inside a Hyper-V virtual machine (Windows Pro, Enterprise or
-  Education). Everything Cowork does stays inside the VM.
 
 ## Turning it off
 
